@@ -21,12 +21,14 @@ Antimicrobial resistance (AMR) in Klebsiella pneumoniae has become a major healt
 │   ├── run_gubbins.sh                                # Bash script for filtering out polymorphic sites
 │   ├── scan_amrfinder.sh                             # Bash script for AMR gene & virulence factor detection by AMRFinderPlus
 │   └── typing_Kleborate.sh                           # Bash script for multi-function profiling of Klebsiella genome by Kleborate
-├── R&Python_code                                 # Folder containing R script and Jupyter notebook
-│   ├── metadata_processing.R                         # R script for the relevant metadata processing
-│   └── plasmid_pygenomeviz.ipynb                     # Python script for the plasmid alignment and visualization by pyGenomeViz
-├── Files                                         # Folder containing metadata and annotated plasmid sequences
-│   ├── Annotated_plasmid                             # Folder containing annotated plasmid sequences in gbk format
-│   │   └── [Annotated plasmid files in gbk format]   
+├── R_code                                        # Folder containing R script
+│   ├── global_samples.R                              # R script for clustering the external public isolates
+│   ├── phylodynamic.R                                # R script for analysing phylodynamic results
+│   ├── plasmid.R                                     # R script for clustering and visualising the plasmids 
+│   └── seq_meta.R                                    #  R script for processing sequence metadata
+├── Files                                         # Folder containing metadata and plasmid sequences
+│   ├── Plasmid_sequences                             # Folder containing plasmid sequences in fasta format
+│   │   └── [plasmid sequences in fasta format]   
 │   └── Samples_metadata.csv                          # Metadata of samples that were in-house sequenced in this study
 └── README.md                             
 
