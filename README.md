@@ -9,16 +9,17 @@ Antimicrobial resistance (AMR) in Klebsiella pneumoniae has become a major healt
 ```plaintext
 .
 ├── Bash_code                                     # Folder containing bash scripts
-│   ├── annotate_bakta.sh                             # Assembled genome annotation bash script
+|   ├── add_date_city.sh                              # Bash script for adding the collection and location info to the alignment file
+│   ├── annotate_prokka.sh                            # Assembled genome annotation bash script
 │   ├── assembly_qc_quast.sh                          # Genome assembly quality assessment bash script
 │   ├── assembly_unicycler.sh                         # Short-read genome assembly bash script
 │   ├── assembly_unicycler_hybird.sh                  # Long-read hybrid genome assembly bash script
+│   ├── call_snp_sites.sh                             # Bash script for calling SNPs from alignment by SNP-sites 
 │   ├── mapping_snippy.sh                             # Bash script for mapping short reads against reference genome
 │   ├── profiling_metaphlan.sh                        # Bash script for profiling the sequencing reads species as QC for contamination
-│   ├── run_beast2.sh                                 # Bash script for running Bayesian Evolutionary Analysis Sampling Trees 2 (BEAST2)
+│   ├── run_beast1.sh                                 # Bash script for running Bayesian Evolutionary Analysis Sampling Trees v1 (BEAST1)
 │   ├── run_gubbins.sh                                # Bash script for filtering out polymorphic sites
 │   ├── scan_amrfinder.sh                             # Bash script for AMR gene & virulence factor detection by AMRFinderPlus
-│   ├── typing_srst.sh                                # Bash script for gene detection against the relevant database by srst2
 │   └── typing_Kleborate.sh                           # Bash script for multi-function profiling of Klebsiella genome by Kleborate
 ├── R&Python_code                                 # Folder containing R script and Jupyter notebook
 │   ├── metadata_processing.R                         # R script for the relevant metadata processing
