@@ -1,4 +1,5 @@
-# Unravelling the epidemiological landscape of Klebsiella pneumoniae in multicentre hospitals
+# Predicting Clinical Severity from Combined Genomic Signatures in Klebsiella pneumoniae
+
 
 ## Abstract
 
