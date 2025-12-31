@@ -1,4 +1,4 @@
-# Predicting Clinical Severity from Combined Genomic Signatures in *Klebsiella pneumoniae*
+# Genomic Signatures and Prediction of Clinical Severity in *Klebsiella pneumoniae* infections in a Multicenter Cohort
 
 
 ## Abstract
@@ -14,7 +14,7 @@ Infections caused by convergent strains exhibited the highest severity, with nea
 ## Conclusion
 These findings provide quantitative measures of genetic risk factors for *K. pneumoniae* infections and highlight the role of carbapenem resistance as the main driver of clinical severity. They also underscore the potential of genomic biomarkers as predictive diagnostic tools for clinical management and infection-prevention strategies for *K. pneumoniae*.
 
-## File Structure
+## Repository Structure
 
 ```plaintext
 .
@@ -37,12 +37,42 @@ These findings provide quantitative measures of genetic risk factors for *K. pne
 │   ├── plasmid.R                                     # R script for clustering and visualising the plasmids 
 │   └── seq_meta.R                                    #  R script for processing sequence metadata
 ├── Files                                         # Folder containing metadata and plasmid sequences
-│   ├── Plasmid_sequences                             # Folder containing plasmid sequences in fasta format
-│   │   └── [plasmid sequences in fasta format]   
-│   └── Samples_metadata.csv                          # Metadata of samples that were in-house sequenced in this study
+│   │ Plasmid_sequences                               # Folder containing plasmid sequences in fasta format
+│   └──    └── [plasmid sequences in fasta format]  
 └── README.md                             
 
 ```
+
+##  Data Release structure
+The large data release can be accessed through release page or link: https://github.com/hjy1805/Kp_multicentre_hospitals/releases/tag/v1
+
+```plaintext
+DataSubmit/
+├── GWAS                                             # Folder GWAS results
+|   ├── Death_GWAS_PanGenome.csv                         # GWAS results for patient mortality using a pangenome presence–absence matrix
+│   ├── ICU_GWAS_PanGenome.csv                           # GWAS results for patient ICU using a pangenome presence–absence matrix
+│   ├── LOS_GWAS_PanGenome.csv                           # GWAS results for patient Length of Stay (LOS) using a pangenome presence–absence matrix
+│   ├── SNPs_ICU_GWAS.csv                                # GWAS results for patient ICU using a single-nucleotide polymorphisms (SNPs)
+│   ├── SNPs_LOS_GWAS.csv                                # GWAS results for patient Length of Stay (LOS) using a single-nucleotide polymorphisms (SNPs)
+│   └── SNPs_Mortality_GWAS.csv                          # GWAS results for patient mortality using a single-nucleotide polymorphisms (SNPs)
+├── ML                                              # Folder contains files for machine learning model trainning 
+│   ├── Labels                                           # Folder of labels
+│   │   ├──df_phenotype_ICU.csv                               # dataframe of ICU lebel of patients
+│   │   ├──df_phenotype_LOS.csv                               # dataframe of Length of Stay (LOS) lebel of patients
+│   │   └──df_phenotype_Mortality.csv                         # dataframe of mortality lebel of patients
+│   ├── Predictors                                       # Folders of predictiors
+│   │   ├──df_phenotype_ICU.csv                               # dataframe of ICU predictiors of patients
+│   │   ├──df_phenotype_LOS.csv                               # dataframe of Length of Stay (LOS) predictiors of patients
+│   │   └──df_phenotype_Mortality.csv                         # dataframe of mortality predictiors of patients
+├── Plasmid                                         # Folder contains files for plasmids
+│   ├── plasmid_profiles.csv                             # plasmid profiles for it AMR, virulence genes and replicon
+│   └── PlasmidONTAccession.csv                          # ENA and GenBank accessions for ONT-sequenced plasmid origin samples
+├── gene_presence_absence_PanGenome.csv             # Panaroo gene presence–absence matrix used for pangenome analysis in csv format 
+└── pan_genome_reference.fa                         # Panaroo pangenome reference sequences in FASTA format    
+
+```
+
+
 ## Reference
 
 
