@@ -44,7 +44,7 @@ These findings provide quantitative measures of genetic risk factors for *K. pne
 ```
 
 ##  Data Release structure
-The large data release can be accessed through release page or link: https://github.com/hjy1805/Kp_multicentre_hospitals/releases/tag/v1
+The large data release can be accessed through the release page or link: https://github.com/hjy1805/Kp_multicentre_hospitals/releases/tag/v1
 
 ```plaintext
 DataSubmit/
@@ -55,17 +55,17 @@ DataSubmit/
 │   ├── SNPs_ICU_GWAS.csv                                # GWAS results for patient ICU using a single-nucleotide polymorphisms (SNPs)
 │   ├── SNPs_LOS_GWAS.csv                                # GWAS results for patient Length of Stay (LOS) using a single-nucleotide polymorphisms (SNPs)
 │   └── SNPs_Mortality_GWAS.csv                          # GWAS results for patient mortality using a single-nucleotide polymorphisms (SNPs)
-├── ML                                              # Folder contains files for machine learning model trainning 
+├── ML                                              # Folder contains files for machine learning model training 
 │   ├── Labels                                           # Folder of labels
-│   │   ├──df_phenotype_ICU.csv                               # dataframe of ICU lebel of patients
-│   │   ├──df_phenotype_LOS.csv                               # dataframe of Length of Stay (LOS) lebel of patients
-│   │   └──df_phenotype_Mortality.csv                         # dataframe of mortality lebel of patients
-│   ├── Predictors                                       # Folders of predictiors
-│   │   ├──df_phenotype_ICU.csv                               # dataframe of ICU predictiors of patients
-│   │   ├──df_phenotype_LOS.csv                               # dataframe of Length of Stay (LOS) predictiors of patients
-│   │   └──df_phenotype_Mortality.csv                         # dataframe of mortality predictiors of patients
+│   │   ├──df_phenotype_ICU.csv                               # dataframe of ICU label of patients
+│   │   ├──df_phenotype_LOS.csv                               # dataframe of Length of Stay (LOS) label of patients
+│   │   └──df_phenotype_Mortality.csv                         # dataframe of mortality label of patients
+│   ├── Predictors                                       # Folders of predictors
+│   │   ├──df_phenotype_ICU.csv                               # dataframe of ICU predictors of patients
+│   │   ├──df_phenotype_LOS.csv                               # dataframe of Length of Stay (LOS) predictors of patients
+│   │   └──df_phenotype_Mortality.csv                         # dataframe of mortality predictors of patients
 ├── Plasmid                                         # Folder contains files for plasmids
-│   ├── plasmid_profiles.csv                             # plasmid profiles for it AMR, virulence genes and replicon
+│   ├── plasmid_profiles.csv                             # plasmid profiles for AMR, virulence genes and replicon
 │   └── PlasmidONTAccession.csv                          # ENA and GenBank accessions for ONT-sequenced plasmid origin samples
 ├── gene_presence_absence_PanGenome.csv             # Panaroo gene presence–absence matrix used for pangenome analysis in csv format 
 └── pan_genome_reference.fa                         # Panaroo pangenome reference sequences in FASTA format    
