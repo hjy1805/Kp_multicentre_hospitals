@@ -42,6 +42,9 @@ This study identifies key genomic determinants that drive severe *K. pneumoniae*
 ├── Python_code                                     # Folder containing R script
 │   ├── MLModels.ipynb                                # Python script for the machine learning models
 │   ├── requirements.txt                              # Library requirements
+│   ├── Mortality_XGBoost_results.csv                  # Results of the XGBoost model trained for Mortality label
+│   ├── ICU_XGBoost_results.csv                        # Results of the XGBoost model trained for ICU Admission label 
+│   └── LOS_NGBoost_results.csv                        # Results of the NGBoost model trained for LOS label 
 ├── Files                                         # Folder containing metadata and plasmid sequences
 │   │ Plasmid_sequences                               # Folder containing plasmid sequences in fasta format
 │   └──    └── [plasmid sequences in fasta format]  
