@@ -1,4 +1,4 @@
-# Repository of Genomic Signatures and Prediction of Clinical Severity in Klebsiella pneumoniae infections in a Multicenter Cohort
+# Repository of Genomic Signatures and Prediction of Clinical Severity in *Klebsiella pneumoniae* infections in a Multicenter Cohort
 
 This repository contains all analysis code (bash, R, and Python) together with intermediate genomics and machine-learning artefacts generated for our multicentre large-scale genomic study of *Klebsiella pneumoniae*. Input datasets required to reproduce the machine-learning analyses are provided on the GitHub Releases page.
 
