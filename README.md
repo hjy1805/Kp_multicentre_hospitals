@@ -81,18 +81,17 @@ DataSubmit/
 
 ## Reference
 
+If you use this repository, please cite the corresponding publication (details to be added upon acceptance).
 
-## Contacts
-For inquiries regarding this research, please contact:
+---
 
-Jiayi Huang
+## Contact
 
-Email: jiayi.huang@kaust.edu.sa
+For questions, issues, or collaboration related to this repository, please contact:
 
-PhD student
+**Jiayi Huang, PhD Student**  
+Infectious Disease Epidemiology Laboratory  
+Biological and Environmental Science and Engineering (BESE) Division  
+King Abdullah University of Science and Technology (KAUST)  
 
-Infectious Disease Epidemiology Lab
-
-Biological and Environmental Science and Engineering (BESE) Division
-
-King Abdullah University of Science and Technology (KAUST)
+📧 **Email:** jiayi.huang@kaust.edu.sa
