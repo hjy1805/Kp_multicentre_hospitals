@@ -36,6 +36,9 @@ These findings provide quantitative measures of genetic risk factors for *K. pne
 │   ├── phylodynamic.R                                # R script for analysing phylodynamic results
 │   ├── plasmid.R                                     # R script for clustering and visualising the plasmids 
 │   └── seq_meta.R                                    #  R script for processing sequence metadata
+├── Python_code                                        # Folder containing R script
+│   ├── MLModels.ipynb                                # Python script for the machine learning models
+│   ├── requirements.txt                                # Library requirements
 ├── Files                                         # Folder containing metadata and plasmid sequences
 │   │ Plasmid_sequences                               # Folder containing plasmid sequences in fasta format
 │   └──    └── [plasmid sequences in fasta format]  
