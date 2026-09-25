@@ -44,7 +44,9 @@ This study identifies key genomic determinants associated with severe K. pneumon
 │   └── LOS_NGBoost_results.csv                        # Results of the NGBoost model trained for LOS label 
 ├── Files                                         # Folder containing metadata and plasmid sequences
 │   │ Plasmid_sequences                               # Folder containing plasmid sequences in fasta format
-│   └──    └── [plasmid sequences in fasta format]  
+│   └──    └── [plasmid sequences in fasta format]
+│   └──    └── GWAS Results for SNP and PanGenome
+│   └──    └── *peg-344* sequence and profile files 
 └── README.md                             
 
 ```
