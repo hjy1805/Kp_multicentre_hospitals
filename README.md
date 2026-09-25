@@ -46,7 +46,7 @@ This study identifies key genomic determinants associated with severe K. pneumon
 │   │ Plasmid_sequences                               # Folder containing plasmid sequences in fasta format
 │   └──    └── [plasmid sequences in fasta format]
 │   └──    └── GWAS Results for SNP and PanGenome
-│   └──    └── *peg-344* sequence and profile files 
+│   └──    └── peg-344 sequence and profile files 
 └── README.md                             
 
 ```
