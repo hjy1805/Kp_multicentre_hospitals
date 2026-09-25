@@ -54,13 +54,6 @@ The large data release can be accessed through the release page or link: https:/
 
 ```plaintext
 DataSubmit/
-├── GWAS                                             # Folder GWAS results
-|   ├── Death_GWAS_PanGenome.csv                         # GWAS results for patient mortality using a pangenome presence–absence matrix
-│   ├── ICU_GWAS_PanGenome.csv                           # GWAS results for patient ICU using a pangenome presence–absence matrix
-│   ├── LOS_GWAS_PanGenome.csv                           # GWAS results for patient Length of Stay (LOS) using a pangenome presence–absence matrix
-│   ├── SNPs_ICU_GWAS.csv                                # GWAS results for patient ICU using a single-nucleotide polymorphisms (SNPs)
-│   ├── SNPs_LOS_GWAS.csv                                # GWAS results for patient Length of Stay (LOS) using a single-nucleotide polymorphisms (SNPs)
-│   └── SNPs_Mortality_GWAS.csv                          # GWAS results for patient mortality using a single-nucleotide polymorphisms (SNPs)
 ├── ML                                              # Folder contains files for machine learning model training 
 │   ├── Labels                                           # Folder of labels
 │   │   ├──df_phenotype_ICU.csv                               # dataframe of ICU label of patients
