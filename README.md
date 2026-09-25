@@ -86,14 +86,14 @@ For questions, issues, or collaboration related to this repository, please conta
 
 **Jiayi Huang, PhD Student**  
 Infectious Disease Epidemiology Laboratory  
-Biological and Environmental Science and Engineering (BESE) Division  
+Biomedical Sciences Division (BioMed) 
 King Abdullah University of Science and Technology (KAUST)  
 
 📧 **Email:** jiayi.huang@kaust.edu.sa
 
 **Sara Iftikhar, Research Assistant**  
 Infectious Disease Epidemiology Laboratory  
-Biological and Environmental Science and Engineering (BESE) Division  
+Biomedical Sciences Division (BioMed)
 King Abdullah University of Science and Technology (KAUST)  
 
 📧 **Email:** sara.iftikhar@kaust.edu.sa
