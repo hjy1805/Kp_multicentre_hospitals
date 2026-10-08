@@ -1,3 +1,6 @@
+# Run from the repository root; data paths use its Files directory.
+DATA_DIR <- file.path(getwd(), "Files")
+
 # Load required libraries ------------------------------------------------------
 library(tidyverse)
 library(readxl)
@@ -8,27 +11,27 @@ library(ggrepel)
 # -----------------------------------------------------------------------------
 
 # Read and process forward read size file
-forward_size <- read_tsv("./forward_size_b4_5.tsv") %>%
+forward_size <- read_tsv(file.path(DATA_DIR, "forward_size_b4_5.tsv")) %>%
   separate(file, into = c("text1", "tag", "text3"), sep = "/", remove = TRUE) %>%
   select(-c(text1, text3)) %>%
   rename(forward_size = size) %>%
   relocate(tag)
 
 # Read and process reverse read size file
-reverse_size <- read_tsv("./reverse_size_b4_5.tsv") %>%
+reverse_size <- read_tsv(file.path(DATA_DIR, "reverse_size_b4_5.tsv")) %>%
   separate(file, into = c("text1", "tag", "text3"), sep = "/", remove = TRUE) %>%
   select(-c(text1, text3)) %>%
   rename(reverse_size = size)
 
 # Read mapping coverage data
-map_coverage <- read_tsv("./coverage_b4_5.tsv") %>%
+map_coverage <- read_tsv(file.path(DATA_DIR, "coverage_b4_5.tsv")) %>%
   mutate(coverage = 100 - percent_gap)
 
 # Read Kleborate result table
-kleborate <- read_tsv("./kleborate_result_b4_5.txt")
+kleborate <- read_tsv(file.path(DATA_DIR, "kleborate_result_b4_5.txt"))
 
 # Read ENA accession metadata
-ena <- read_csv("./run_kp_b4_5.csv") %>%
+ena <- read_csv(file.path(DATA_DIR, "run_kp_b4_5.csv")) %>%
   rename(ENA_acc = id) %>%
   select(ENA_acc, alias)
 
@@ -40,19 +43,19 @@ meta <- forward_size %>%
   left_join(kleborate, by = c("tag" = "strain"))
 
 # Export merged metadata
-write_tsv(meta, "Kp_b4_5_sequencing_meta.tsv")
+write_tsv(meta, file.path(DATA_DIR, "Kp_b4_5_sequencing_meta.tsv"))
 
 # -----------------------------------------------------------------------------
 # Integrate GenBank accession metadata (Batch B1/B2)
 # -----------------------------------------------------------------------------
 
-meta_b1b2 <- read_tsv("kp_b1b2_sequencing_meta.tsv")
-genbank_acc <- read_csv("./Genbank_acc_b1b2.csv")
+meta_b1b2 <- read_tsv(file.path(DATA_DIR, "kp_b1b2_sequencing_meta.tsv"))
+genbank_acc <- read_csv(file.path(DATA_DIR, "Genbank_acc_b1b2.csv"))
 
 meta_b1b2 <- meta_b1b2 %>%
   left_join(genbank_acc, by = c("tag" = "File"))
 
-write_tsv(meta_b1b2, "kp_b1b2_sequencing_meta_25Jun.tsv")
+write_tsv(meta_b1b2, file.path(DATA_DIR, "kp_b1b2_sequencing_meta_25Jun.tsv"))
 
 # -----------------------------------------------------------------------------
 # Bubble plot: Resistance vs Virulence by Sequence Type (ST)
@@ -105,14 +108,14 @@ p2 <- p1 +
   )
 
 # Save bubble plot
-ggsave(filename = "../bubble_plot.svg", plot = p2, device = "svg", width = 20, height = 16, units = "in")
+ggsave(filename = file.path(DATA_DIR, "bubble_plot.svg"), plot = p2, device = "svg", width = 20, height = 16, units = "in")
 
 # -----------------------------------------------------------------------------
 # Combine metadata with GenBank accessions
 # -----------------------------------------------------------------------------
 
-meta <- read_tsv("./Kp_clincal_metadata_21Oct.tsv")
-all_genbank <- read_csv("../Kp_ML/all_Genbank.csv")
+meta <- read_tsv(file.path(DATA_DIR, "Kp_clincal_metadata_21Oct.tsv"))
+all_genbank <- read_csv(file.path(DATA_DIR, "all_Genbank.csv"))
 
 meta_genbank <- meta %>%
   left_join(all_genbank, by = c("strain" = "sample"))
@@ -120,13 +123,13 @@ meta_genbank <- meta %>%
 # Identify isolates without GenBank accession
 no_genbank <- meta_genbank %>% filter(is.na(Genbank))
 
-write_tsv(meta_genbank, "./Kp_clincal_metadata_21Oct.tsv")
+write_tsv(meta_genbank, file.path(DATA_DIR, "Kp_clincal_metadata_21Oct.tsv"))
 
 # -----------------------------------------------------------------------------
 # Kleborate annotation and longitudinal trends
 # -----------------------------------------------------------------------------
 
-kleborate <- read_tsv("../Kp_ML/Kp_kleborate_report_23Jun.tsv")
+kleborate <- read_tsv(file.path(DATA_DIR, "Kp_kleborate_report_23Jun.tsv"))
 
 meta_kleborate <- meta_genbank %>%
   left_join(kleborate, by = "strain") %>%
@@ -220,13 +223,13 @@ ggplot(bar_mdr_hv_df, aes(x = factor(collect_year), y = ratio, fill = MDR_VF)) +
 # Combine plasmid replicon data with Kleborate annotations
 # -----------------------------------------------------------------------------
 
-plasmid_replicon <- read_tsv("./plasmid/plasmid_amr_vf_replicon.tsv")
-plasmid_kleborate <- read_tsv("./plasmid/plasmid_kleborate_report.tsv")
+plasmid_replicon <- read_tsv(file.path(DATA_DIR, "plasmid_amr_vf_replicon.tsv"))
+plasmid_kleborate <- read_tsv(file.path(DATA_DIR, "plasmid_kleborate_report.tsv"))
 
 plasmid_replicon_kleborate <- plasmid_replicon %>%
   left_join(plasmid_kleborate, by = c("plasmid" = "strain"))
 
-write_tsv(plasmid_replicon_kleborate, "./plasmid_replicon_kleborate.tsv")
+write_tsv(plasmid_replicon_kleborate, file.path(DATA_DIR, "plasmid_replicon_kleborate.tsv"))
 
 ############################################################
 # End of Script

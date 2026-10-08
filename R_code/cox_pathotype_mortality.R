@@ -1,3 +1,6 @@
+# Run from the repository root; data paths use its Files directory.
+DATA_DIR <- file.path(getwd(), "Files")
+
 # ============================================================
 # IN-HOSPITAL MORTALITY BY PATHOTYPE
 # Cox models, each exposure against the Non-AMR/Non-hvKp
@@ -10,8 +13,8 @@ library(survival)
 library(broom)
 library(forestmodel)
 
-base <- "/Users/daneshm/Documents/Kp_KAIMRC"
-revision_dir <- file.path(base, "revision")
+base <- DATA_DIR
+revision_dir <- base
 
 REFERENCE_PATHOTYPE <- "ESBL/CP-negative non-hvKp"
 
@@ -73,7 +76,7 @@ patient_df$pathotype <- genotype_df$pathotype[
 # ============================================================
 
 Confounders <- read_csv(
-  file.path(base, "files_kleborate", "kleborate_results_totall.csv"),
+  file.path(base, "kleborate_results_totall.csv"),
   show_col_types = FALSE
 )
 

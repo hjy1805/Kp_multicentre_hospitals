@@ -1,3 +1,4 @@
+# Run from the repository root; data paths use its Files directory.
 # =============================================================================
 # K-MER THRESHOLD CALIBRATION AND TRANSMISSION SENSITIVITY ANALYSIS
 #
@@ -44,10 +45,9 @@ suppressPackageStartupMessages({
   library(gt)
 })
 
-DATA_DIR  <- "/Users/daneshm/Documents/Kp_KAIMRC"
-CLONE_DIR <- file.path(DATA_DIR, "revision", "transmission", "clones")
-OUT_DIR   <- file.path(DATA_DIR, "revision", "transmission",
-                       "threshold_sensitivity")
+DATA_DIR  <- file.path(getwd(), "Files")
+CLONE_DIR <- DATA_DIR
+OUT_DIR   <- file.path(DATA_DIR, "threshold_sensitivity")
 
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 

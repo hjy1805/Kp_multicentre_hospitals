@@ -1,3 +1,6 @@
+# Run from the repository root; data paths use its Files directory.
+DATA_DIR <- file.path(getwd(), "Files")
+
 # ============================================================
 # CUMULATIVE MORTALITY BY PATHOTYPE AT 30, 60 AND 90 DAYS
 # Proportions with exact binomial 95% CIs.
@@ -10,8 +13,8 @@ library(tidyr)
 library(ggplot2)
 library(scales)
 
-base <- "/Users/daneshm/Documents/Kp_KAIMRC"
-revision_dir <- file.path(base, "revision")
+base <- DATA_DIR
+revision_dir <- base
 
 PATHOTYPE_LEVELS <- c(
   "ESBL/CP-negative non-hvKp",

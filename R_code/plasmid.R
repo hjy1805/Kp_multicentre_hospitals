@@ -1,3 +1,6 @@
+# Run from the repository root; data paths use its Files directory.
+DATA_DIR <- file.path(getwd(), "Files")
+
 #----------------------#
 # Load Required Libraries
 #----------------------#
@@ -10,8 +13,8 @@ library(Rtsne)
 #----------------------#
 # Construct Similarity Matrix from kmer
 #----------------------#
-lines <- readLines("./output.txt")             # Input similarity lines
-files <- readLines("./input.list")             # List of tags (sample names)
+lines <- readLines(file.path(DATA_DIR, "output.txt"))             # Input similarity lines
+files <- readLines(file.path(DATA_DIR, "input.list"))             # List of tags (sample names)
 tags <- as.character(sapply(files, function(x) strsplit(x, " ")[[1]][1]))
 
 sim_mat <- matrix(0, nrow = length(tags), ncol = length(tags))
@@ -29,7 +32,7 @@ for (i in seq_along(lines)) {
 }
 
 # Export similarity matrix
-write.table(sim_mat, file = paste0(name, "output_matrix.txt"), sep = "\t", row.names = FALSE)
+write.table(sim_mat, file = file.path(DATA_DIR, paste0(name, "output_matrix.txt")), sep = "\t", row.names = FALSE)
 
 #----------------------#
 # Compute Distance Matrix
@@ -43,7 +46,7 @@ for (i in seq_along(tags)) {
 }
 rownames(dist_mat) <- tags
 colnames(dist_mat) <- tags
-write.table(dist_mat, "./dist_matrix.txt", sep = "\t", row.names = TRUE, col.names = TRUE)
+write.table(dist_mat, file.path(DATA_DIR, "dist_matrix.txt"), sep = "\t", row.names = TRUE, col.names = TRUE)
 
 #----------------------#
 # K-means Clustering and PCA Visualization
@@ -78,7 +81,7 @@ fviz_pca_ind(
 
 # Save cluster assignments
 tags_clusters_df <- data.frame(Tag = tags, Cluster = kmeans_res$cluster)
-write_tsv(tags_clusters_df, "./plasmid_cluster.tsv")
+write_tsv(tags_clusters_df, file.path(DATA_DIR, "plasmid_cluster.tsv"))
 
 #----------------------#
 # t-SNE Visualization
@@ -91,7 +94,7 @@ plot(tsne_results$Y, col = "blue", pch = 19, main = "t-SNE Clustering")
 #----------------------#
 # Load and Visualize mge-cluster Results
 #----------------------#
-mge_data <- read.csv("./new-model_results.csv")
+mge_data <- read.csv(file.path(DATA_DIR, "new-model_results.csv"))
 mge_data$Standard_Cluster <- as.factor(mge_data$Standard_Cluster)
 
 ggplot(mge_data, aes(x = tsne1D, y = tsne2D, color = Standard_Cluster)) +
@@ -105,9 +108,9 @@ ggplot(mge_data, aes(x = tsne1D, y = tsne2D, color = Standard_Cluster)) +
 #----------------------#
 # Load Annotation Data (CARD, VFDB, Replicon)
 #----------------------#
-card <- read_tsv("./card_summary.tsv")
-vfdb <- read_tsv("./vfdb_summary.tsv")
-replicon <- read_tsv("./plasmid_summary.tsv")
+card <- read_tsv(file.path(DATA_DIR, "card_summary.tsv"))
+vfdb <- read_tsv(file.path(DATA_DIR, "vfdb_summary.tsv"))
+replicon <- read_tsv(file.path(DATA_DIR, "plasmid_summary.tsv"))
 
 # Extract plasmid names
 replicon <- replicon %>%
@@ -180,7 +183,7 @@ mge_data_replicon_iuc_amr <- mge_data %>%
   left_join(replicon_pivot, by = c("Sample_Name" = "plasmid")) %>%
   left_join(card_pivot2, by = c("Sample_Name" = "plasmid"))
 
-write_tsv(mge_data_replicon_iuc_amr, "./mge_data_replicon_iuc_amr.tsv")
+write_tsv(mge_data_replicon_iuc_amr, file.path(DATA_DIR, "mge_data_replicon_iuc_amr.tsv"))
 
 #----------------------#
 # Visualization (t-SNE overlays)

@@ -1,3 +1,6 @@
+# Run from the repository root; data paths use its Files directory.
+DATA_DIR <- file.path(getwd(), "Files")
+
 # ============================================================
 # PUTATIVE TRANSMISSION NETWORK
 # seqTrack ancestries from summed k-mer distances, plotted
@@ -9,8 +12,8 @@ library(dplyr)
 library(adegenet)
 library(igraph)
 
-base <- "/Users/daneshm/Documents/Kp_KAIMRC"
-revision_dir <- file.path(base, "revision")
+base <- DATA_DIR
+revision_dir <- base
 
 # Ancestries above this k-mer distance are discarded
 MAX_LINK_DISTANCE <- 4
@@ -61,7 +64,7 @@ ST_COLOURS <- c(
 # ============================================================
 
 kmers <- read_csv(
-  file.path(base, "distancematrix", "summed_kmer_distance.csv"),
+  file.path(base, "summed_kmer_distance.csv"),
   show_col_types = FALSE
 )
 

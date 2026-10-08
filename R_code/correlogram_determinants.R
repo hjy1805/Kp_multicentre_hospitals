@@ -1,3 +1,6 @@
+# Run from the repository root; data paths use its Files directory.
+DATA_DIR <- file.path(getwd(), "Files")
+
 # ============================================================
 # PAIRWISE CORRELATION OF RESISTANCE / VIRULENCE DETERMINANTS
 # ============================================================
@@ -15,7 +18,7 @@ MIN_COUNT <- 10
 # ============================================================
 
 kleborate_encoded_df <- read_csv(
-  "/Users/daneshm/Documents/Kp_KAIMRC/revision/Kleborate_OD_calculation.csv",
+  file.path(DATA_DIR, "Kleborate_OD_calculation.csv"),
   show_col_types = FALSE
 )
 

@@ -1,3 +1,6 @@
+# Run from the repository root; data paths use its Files directory.
+DATA_DIR <- file.path(getwd(), "Files")
+
 # ===========================
 # Load Required Libraries
 # ===========================
@@ -17,8 +20,8 @@ library(ggsignif)
 # ===========================
 # Load and Merge Metadata
 # ===========================
-external_meta <- read_tsv("./all_external_meta_clean.tsv")
-external_kleborate <- read_tsv("./kleborate_output.tsv")
+external_meta <- read_tsv(file.path(DATA_DIR, "all_external_meta_clean.tsv"))
+external_kleborate <- read_tsv(file.path(DATA_DIR, "kleborate_output.tsv"))
 
 # Merge metadata with Kleborate outputs
 external_meta_kleborate <- external_meta %>%
@@ -33,16 +36,16 @@ summaries_st_pds <- external_meta_kleborate %>%
 clusters <- c("PDS000060581.72", "PDS000006578.129", "PDS000091501.207")
 for (cl in clusters) {
   df <- external_meta_kleborate %>% filter(SNP_cluster == cl)
-  write_tsv(df, paste0("./", cl, "_meta.tsv"))
+  write_tsv(df, file.path(DATA_DIR, paste0(cl, "_meta.tsv")))
 }
 
 # =======================================
 # Load PDG and PDS Accession Mappings
 # =======================================
-big_meta <- read_tsv("../../Kp_ML/PDG000000012.2086.metadata.tsv") %>%
+big_meta <- read_tsv(file.path(DATA_DIR, "PDG000000012.2086.metadata.tsv")) %>%
   distinct(biosample_acc, .keep_all = TRUE)
 
-pds_acc <- read_tsv("../../Kp_ML/PDS.tsv") %>%
+pds_acc <- read_tsv(file.path(DATA_DIR, "PDS.tsv")) %>%
   distinct(BioSample, .keep_all = TRUE)
 
 # Map between BioSample, Isolate, and Run
@@ -56,7 +59,7 @@ big_meta <- big_meta %>%
 name_map <- setNames(big_meta$biosample_acc, big_meta$Isolate)
 
 # Load GenBank accession list
-all_genbank <- read_csv("../../Kp_ML/all_Genbank.csv")
+all_genbank <- read_csv(file.path(DATA_DIR, "all_Genbank.csv"))
 
 # =====================================================
 # Compute External–Internal SNP Distance (Example 1)
@@ -78,7 +81,7 @@ compute_distance_matrix <- function(tree_path, name_map) {
 }
 
 # --- Run for specific cluster ---
-PDS000060581.72_dist <- compute_distance_matrix("./PDS000060581.72.newick", name_map)
+PDS000060581.72_dist <- compute_distance_matrix(file.path(DATA_DIR, "PDS000060581.72.newick"), name_map)
 
 # Separate internal and external isolates
 internal_list <- intersect(all_genbank$Genbank, rownames(PDS000060581.72_dist))
@@ -99,7 +102,7 @@ EI_matrix_long_min <- EI_matrix_long %>%
 # =======================================
 #  Map Countries to Global Regions
 # =======================================
-cleaned_metadata <- read_tsv("./all_external_meta_clean.tsv")
+cleaned_metadata <- read_tsv(file.path(DATA_DIR, "all_external_meta_clean.tsv"))
 
 region_map <- c(
   "China" = "East Asia", "Japan" = "East Asia", "South Korea" = "East Asia",
@@ -183,7 +186,7 @@ p1 <- ggplot(EI_cumulative, aes(x = distance, y = freq, fill = region)) +
 ############################################################
 
 # Read Kleborate output
-cleaned_kleborate <- read_tsv("./kleborate_output_need_filter.tsv")
+cleaned_kleborate <- read_tsv(file.path(DATA_DIR, "kleborate_output_need_filter.tsv"))
 
 # Merge with external metadata, exclude unknown or GenBank strains
 external_metadata_kleborate <- cleaned_metadata %>%
@@ -192,7 +195,7 @@ external_metadata_kleborate <- cleaned_metadata %>%
   filter(!BioSample %in% all_genbank$Genbank)
 
 # Save merged file
-write_tsv(external_metadata_kleborate, "./external_metadata_kleborate.tsv")
+write_tsv(external_metadata_kleborate, file.path(DATA_DIR, "external_metadata_kleborate.tsv"))
 
 ############################################################
 # Combine Kleborate Output with Internal Metadata
@@ -204,24 +207,24 @@ all_pds <- all_genbank %>%
   select(sample, Genbank, `SNP cluster`)
 
 # Read and preprocess internal clinical metadata
-internal_metadata <- read_tsv("./Kp_clincal_metadata_18May.tsv") %>%
+internal_metadata <- read_tsv(file.path(DATA_DIR, "Kp_clincal_metadata_18May.tsv")) %>%
   separate(Collection_Date, into = c("collect_year", "collect_month", "collect_day"), sep = "/", remove = FALSE)
 
 # Join with PDS cluster and Kleborate report
-internal_kleb <- read_tsv("./Kp_kleborate_report_23Jun.tsv")
+internal_kleb <- read_tsv(file.path(DATA_DIR, "Kp_kleborate_report_23Jun.tsv"))
 
 internal_metadata_kleborate <- internal_metadata %>%
   left_join(all_pds, by = c("strain" = "sample")) %>%
   left_join(internal_kleb, by = c("strain" = "strain"))
 
 # Save merged file
-write_tsv(internal_metadata_kleborate, "./internal_metadata_kleborate.tsv")
+write_tsv(internal_metadata_kleborate, file.path(DATA_DIR, "internal_metadata_kleborate.tsv"))
 
 ############################################################
 # Data Preparation for Plotting
 ############################################################
 
-cleaned_metadata_kleborate_plot <- read_csv("../../Kp_ML/external_internal_metadata_kleborate.csv") %>%
+cleaned_metadata_kleborate_plot <- read_csv(file.path(DATA_DIR, "external_internal_metadata_kleborate.csv")) %>%
   filter(!is.na(collect_year)) %>%
   filter(collect_year != "2007")
 
@@ -614,10 +617,10 @@ carb_gene_df_grouped <- carb_gene_df_grouped %>%
 
 
 # Load required metadata files
-city_info <- read_tsv("./internal_metadata_with_city.tsv") %>%
+city_info <- read_tsv(file.path(DATA_DIR, "internal_metadata_with_city.tsv")) %>%
   select(strain, City_Name)
 
-snp_cluster_info <- read_csv("./external_internal_genbank.csv") %>%
+snp_cluster_info <- read_csv(file.path(DATA_DIR, "external_internal_genbank.csv")) %>%
   left_join(pds_acc, by = c("Genbank" = "BioSample")) %>%
   select(sample, Genbank, type, `SNP cluster`)
 
@@ -669,8 +672,8 @@ st2096_meta_internal <- st2096_meta %>%
   )))
 
 # Save processed metadata
-write_tsv(st2096_meta_external, "./st2096_meta_external.tsv")
-write_tsv(st2096_meta_internal, "./st2096_meta_internal.tsv")
+write_tsv(st2096_meta_external, file.path(DATA_DIR, "st2096_meta_external.tsv"))
+write_tsv(st2096_meta_internal, file.path(DATA_DIR, "st2096_meta_internal.tsv"))
 
 
 # --------------------------------------------------------------
@@ -690,7 +693,7 @@ st2096_meta <- st2096_meta %>%
 # --------------------------------------------------------------
 # Build Neighbor-Joining tree from SNP alignment
 # --------------------------------------------------------------
-st2096_dna <- read.dna("./st2096.snp_sites.aln", format = "fasta")
+st2096_dna <- read.dna(file.path(DATA_DIR, "st2096.snp_sites.aln"), format = "fasta")
 st2096_distdna <- dist.dna(st2096_dna, model = "N", pairwise.deletion = TRUE, as.matrix = TRUE)
 st2096_njtree <- nj(st2096_distdna) %>% midpoint.root()
 
@@ -864,8 +867,8 @@ st147_meta_internal <- st147_meta %>%
   )))
 
 # Save processed metadata
-write_tsv(st147_meta_external, "./st147_meta_external.tsv")
-write_tsv(st147_meta_internal, "./st147_meta_internal.tsv")
+write_tsv(st147_meta_external, file.path(DATA_DIR, "st147_meta_external.tsv"))
+write_tsv(st147_meta_internal, file.path(DATA_DIR, "st147_meta_internal.tsv"))
 
 
 # --------------------------------------------------------------
@@ -900,7 +903,7 @@ st147_meta_pivot <- st147_meta %>%
 # --------------------------------------------------------------
 # 5. Construct Neighbor-Joining phylogenetic tree
 # --------------------------------------------------------------
-st147_dna <- read.dna("./st147.snp_sites.aln", format = "fasta")
+st147_dna <- read.dna(file.path(DATA_DIR, "ST147.snp_sites.aln"), format = "fasta")
 st147_distdna <- dist.dna(st147_dna, model = "N", pairwise.deletion = TRUE, as.matrix = TRUE)
 st147_njtree <- nj(st147_distdna) %>% midpoint.root()
 
@@ -1034,8 +1037,8 @@ pds72_internal <- pds72 %>%
   left_join(city_info, by = c("sample" = "strain")) %>%
   select(sample, type, collection_date, City_Name)
 
-write_tsv(pds72, "./PDS72_world.tsv")
-write_tsv(pds72_internal, "./PDS72_saudi.tsv")
+write_tsv(pds72, file.path(DATA_DIR, "PDS72_world.tsv"))
+write_tsv(pds72_internal, file.path(DATA_DIR, "PDS72_saudi.tsv"))
 
 pds9 <- st2096_meta %>%
   filter(`SNP cluster` == "PDS000166904.9")
@@ -1045,19 +1048,19 @@ pds9_internal <- pds9 %>%
   left_join(city_info, by = c("sample" = "strain")) %>%
   select(sample, type, collection_date, City_Name)
 
-write_tsv(pds9_internal, "./PDS9_saudi.tsv")
+write_tsv(pds9_internal, file.path(DATA_DIR, "PDS9_saudi.tsv"))
 
 
 # --- ST147-related clusters for global analysis ---
 pds207 <- st147_meta %>%
   filter(`SNP cluster` == "PDS000091501.207") %>%
   select(sample, type, collection_date, country)
-write_tsv(pds207, "./PDS207_world.tsv")
+write_tsv(pds207, file.path(DATA_DIR, "PDS207_world.tsv"))
 
 pds129 <- st147_meta %>%
   filter(`SNP cluster` == "PDS000006578.129") %>%
   select(sample, type, collection_date, country)
-write_tsv(pds129, "./PDS129_world.tsv")
+write_tsv(pds129, file.path(DATA_DIR, "PDS129_world.tsv"))
 
 
 

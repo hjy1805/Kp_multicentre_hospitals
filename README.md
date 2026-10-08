@@ -117,10 +117,10 @@ The notebook contains sections for logistic regression, XGBoost, quantile regres
 
 | Analysis | Script |
 |---|---|
-| Mortality with discharge as a competing event | [competing_risk_pathotype_1.R](R_code/competing_risk_pathotype_1.R) |
+| Mortality with discharge as a competing event | [competing_risk_pathotype.R](R_code/competing_risk_pathotype.R) |
 | Cox regression by pathotype | [cox_pathotype_mortality.R](R_code/cox_pathotype_mortality.R) |
 | Mortality and ICU determinants | [mortality_determinants.R](R_code/mortality_determinants.R), [icu_determinants.R](R_code/icu_determinants.R) |
-| Transmission networks | [transmission_network_1.R](R_code/transmission_network_1.R) |
+| Transmission networks | [transmission_network.R](R_code/transmission_network.R) |
 | K-mer threshold and sensitivity analyses | [kmer_transmission_analysis.R](R_code/kmer_transmission_analysis.R), [kmer_threshold_analysis.R](R_code/kmer_threshold_analysis.R) |
 
 ### 4. Bash: genome-processing workflows

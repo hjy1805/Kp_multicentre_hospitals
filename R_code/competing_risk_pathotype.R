@@ -1,3 +1,6 @@
+# Run from the repository root; data paths use its Files directory.
+DATA_DIR <- file.path(getwd(), "Files")
+
 # ============================================================
 # COMPETING-RISK ANALYSIS BY PATHOTYPE
 # In-hospital death (event 1) with discharge alive (event 2)
@@ -11,8 +14,8 @@ library(ggplot2)
 library(cmprsk)
 library(survminer)
 
-base <- "/Users/daneshm/Documents/Kp_KAIMRC"
-revision_dir <- file.path(base, "revision")
+base <- DATA_DIR
+revision_dir <- base
 
 REFERENCE_PATHOTYPE <- "Non-AMR/Non-hvKp"
 REFERENCE_LABEL <- "Other"

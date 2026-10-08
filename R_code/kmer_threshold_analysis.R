@@ -1,3 +1,4 @@
+# Run from the repository root; data paths use its Files directory.
 # =============================================================================
 # K-MER DISTANCE THRESHOLD: CALIBRATION AND SENSITIVITY ANALYSIS
 #
@@ -41,11 +42,10 @@ suppressPackageStartupMessages({
 
 # Root of the project tree. Everything else is derived from it, so this is the
 # only path that changes between machines.
-DATA_DIR <- "/Users/daneshm/Documents/Kp_KAIMRC"
+DATA_DIR <- file.path(getwd(), "Files")
 
-CLONE_DIR <- file.path(DATA_DIR, "revision", "transmission", "clones")
-OUT_DIR   <- file.path(DATA_DIR, "revision", "transmission",
-                       "threshold_sensitivity")
+CLONE_DIR <- DATA_DIR
+OUT_DIR   <- file.path(DATA_DIR, "threshold_sensitivity")
 
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 
